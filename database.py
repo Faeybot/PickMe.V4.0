@@ -6,8 +6,8 @@ from models import Base, User
 from dotenv import load_dotenv
 
 load_dotenv()
-# Mengubah format URL database Railway agar dukung asinkron (asyncpg)
-DATABASE_URL = os.getenv("DATABASE_URL").replace("postgresql://", "postgresql+asyncpg://")
+
+DATABASE_URL = os.getenv("DATABASE_URL").replace("postgresql://", "postgresql+aiopg://")
 
 engine = create_async_engine(DATABASE_URL)
 async_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
