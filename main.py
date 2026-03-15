@@ -1,5 +1,8 @@
 import asyncio
 import os
+
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+
 from aiogram import Bot, Dispatcher, types
 from dotenv import load_dotenv
 from database import init_db
