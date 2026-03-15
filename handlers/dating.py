@@ -1,6 +1,6 @@
 from aiogram import Router, types, F
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-from services import DatingService
+from services.dating_service import DatingService
 from database import async_session
 from models import User
 import os
