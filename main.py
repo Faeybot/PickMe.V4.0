@@ -9,28 +9,28 @@ from utils.scheduler import setup_scheduler
 load_dotenv()
 
 async def main():
-    # 1. Inisialisasi Database (Membuat tabel otomatis)
+    # 1. Pastikan tabel database sudah terbuat
     await init_db()
     
-    # 2. Jalankan Penjadwal (Reset kuota jam 00:00)
+    # 2. Aktifkan penjadwal reset kuota
     setup_scheduler()
     
-    # 3. Inisialisasi Bot & Dispatcher
+    # 3. Inisialisasi Bot
     bot = Bot(token=os.getenv("BOT_TOKEN"))
     dp = Dispatcher()
     
-    # 4. Atur Menu Tombol di Pojok Kiri Bawah Telegram
+    # 4. Daftarkan Perintah Menu (Bot Commands)
     await bot.set_my_commands([
         types.BotCommand(command="start", description="Daftar / Reset Profil"),
-        types.BotCommand(command="menu", description="Buka Menu Utama"),
+        types.BotCommand(command="menu", description="Main Menu (Swipe/Feed)"),
     ])
 
-    # 5. Daftarkan Semua Handler (Logic)
+    # 5. Hubungkan semua Handler (Register, Feed, Dating)
     dp.include_routers(register.router, feed.router, dating.router)
     
-    # 6. Mulai Bot (Menghapus antrean pesan lama agar tidak lag)
+    # 6. Mulai Bot
+    print("🚀 PickMe Bot is LIVE!")
     await bot.delete_webhook(drop_pending_updates=True)
-    print("🚀 PickMe Bot siap digunakan!")
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
@@ -38,4 +38,4 @@ if __name__ == "__main__":
         asyncio.run(main())
     except (KeyboardInterrupt, SystemExit):
         print("Bot Berhenti.")
-      
+    
