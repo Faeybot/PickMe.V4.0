@@ -1,5 +1,8 @@
 from aiogram import Router, types, F
 from aiogram.utils.keyboard import InlineKeyboardBuilder
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from services.dating_service import DatingService
 from database import async_session
 from models import User
